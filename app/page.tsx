@@ -1,113 +1,159 @@
-import Image from "next/image";
+'use client'
+import React, { useEffect, useLayoutEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import AOS from 'aos'
+import 'aos/dist/aos.css';
+
+
 
 export default function Home() {
+  gsap.registerPlugin(ScrollTrigger)
+
+// Q_l and Q_r
+  useLayoutEffect(() => {
+    const tl_q = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#q_l',
+        start: 'top',
+        end: 'center',
+        scrub: 1,
+      },
+    });
+    const tl_qr = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#q_r',
+        start: 'top',
+        end: 'center',
+        scrub: 1,
+      },
+    });
+
+    tl_qr.fromTo('#q_r', {
+      x: 0,
+      duration: 4,
+    }, {
+      x: 500,
+    });
+
+    tl_q.fromTo('#q_l', {
+      x: 0,
+      duration: 4,
+    }, {
+      x: -500,
+    })
+
+
+  });
+
+  // TEXT 
+  useLayoutEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#wtf',
+        start: 'top',
+        end: 'center',
+        scrub: 1,
+      },
+    });
+    tl.fromTo('#wtf', {
+      y: 0,
+      duration: 4,
+    }, {
+      y: -300,
+    })
+  });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: false,
+    })
+  },[])
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <div className="flex w-full min-h-screen flex-col items-center justify-center p-24 ">
+        <section className="">
+          <div className="max-w-5xl"> 
+            <p id="wtf" className="text-montserrat text-[90px] leading-[121.9px] text-center text-white font-black"> У КОГО ЭТО СЕГОДНЯ 
+              ДЕНЬ РОЖДЕНИЯ? </p>
+          </div>
+          <div className="absolute text-center top-[98.7px] left-[305px] rotate-[20.04 deg]"><img id="q_l"  className='w-[140px]' src="/1.png" alt="" /></div>
+          <div className="absolute text-center top-[61px] left-[959.44px]"><img id="q_r" className='w-[170px]' src="/2.png" alt="" /></div>
+          <div className="absolute text-center top-[512.6px] left-[227px]"><img id="q_l" className='w-[90px]' src="/3.png" alt="" /></div>
+          <div className="absolute text-center top-[500px] left-[891.39px]"><img id="q_r" className='w-[190px]' src="/4.png" alt="" /></div>
+        </section>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="flex w-full min-h-screen flex-col items-center  p-24" data-aos="fade-up-right" data-aos-duration="3000" data-aos-delay="100">
+        <section id="">
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[60px] leading-[97.52px] text-center text-white font-black mb-12"> КОНЕЧНО ЖЕ У НАШЕЙ МАМЫ</p>
+          </div>
+        </section>
+        <section id="">
+          <img className="max-w-xl" src="/photo1.png" alt="" />
+        </section>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div id="" className="flex w-full min-h-screen flex-col items-center justify-center gap-12 p-24" data-aos="fade-up-left" data-aos-duration="3000" data-aos-delay="100">
+        <section>
+          <img className="max-w-2xl" src="/photo2.png" alt="" />
+        </section>
+        <section>
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[57px] leading-[97.52px] text-center text-white font-black"> ЖЕЛАЮ ТЕБЕ, ЧТОБЫ ТЫ ВСЕГДА
+               БЫЛА ОКРУЖЕНА ЛЮБОВЬЮ</p>
+          </div>
+        </section>
       </div>
-    </main>
+
+      <div id="" className="flex w-full min-h-screen flex-col items-center justify-center  p-20" data-aos="fade-down-left" data-aos-duration="3000" data-aos-delay="100">
+        <section>
+          <img className="max-w-2xl" src="/photo3.png" alt="" data-aos="zoom-in-down" data-aos-duration="500" />
+        </section>
+        <section>
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[47px] leading-[73.14px] text-center text-white font-black"> ЖЕЛАЮ, ЧТОБЫ ТЫ ВСЕГДА БЫЛА СЧАСТЛИВА КАК ЭТОТ ДЕД, ЕМУ ОЧЕНЬ НРАВИТСЯ КОПАТЬ ОГОРОД</p>
+              <p className="text-montserrat text-[20px] leading-[36.57px] text-center text-white font-black">МНЕ НЕ НРАВИТСЯ КСТАТИ</p>
+          </div>
+        </section>
+      </div>
+
+      <div id="" className="flex w-full min-h-screen flex-col items-center justify-center gap-8 p-24" data-aos="fade-down-right" data-aos-duration="3000">
+        <section>
+          <img className="max-w-4xl" src="/photo4.png" alt="" />
+        </section>
+        <section>
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[57px] leading-[73.14px] text-center text-white font-black"> И ВОТ СТОЛЬКО ДЕНЕГ (Я ТЕБЕ САМ СТОЛЬКО ЗАРАБОТАЮ)</p>
+          </div>
+        </section>
+      </div>
+
+      <div id="" className="flex w-full min-h-screen flex-col items-center justify-center gap-10 p-24" data-aos="fade-up" data-aos-duration="3000">
+        <section>
+          <img className="max-w-3xl" src="/photo5.png" alt="" />
+        </section>
+        <section>
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[55px] leading-[73.14px] text-center text-white font-black">С ДНЕМ РОЖДЕНИЯ ТЕБЯ!!!!!<br/> МЫ ТЕБЯ ВСЕ ОЧЕНЬ ЛЮБИМ</p>
+          </div>
+        </section>
+      </div>
+
+      <div id="" className="flex w-full min-h-screen flex-col items-center justify-center gap-8 mt-48" data-aos="fade-up" data-aos-duration="5000">
+        <section>
+          <img className="max-w-xl" src="/photo6.png" alt="" data-aos='zoom-in'/>
+        </section>
+        <section>
+          <div className="max-w-5xl"> 
+              <p className="text-montserrat text-[55px] leading-[73.14px] text-center text-white font-black">БОНУСОМ ДАРЮ КРУТУЮ МИРУ</p>
+          </div>
+        </section>
+      </div>
+
+    </>
   );
 }
